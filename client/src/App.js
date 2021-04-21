@@ -1,8 +1,8 @@
 import React from "react";
-import { HashRouter as Router } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Header from './components/Header/Header';
-import Form from "./components/Form/Form";
+import Search from './pages/Search';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <div>
         <NavBar />
         <Header />
-        <Form />
+        <Route exact path={["/", "/search"]} component={Search} />
       </div>
     </Router>
   );
