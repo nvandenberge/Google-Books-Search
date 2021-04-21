@@ -6,8 +6,8 @@ export default {
   // Search all books from Googlebooks API
   searchBooks: (query) => axios.get(baseURL + query),
 
-  // Gets all books
-  getBooks: () => axios.get("/api/books"),
+  // Gets all saved books
+  getSavedBooks: () => axios.get("/api/books"),
   
   // Deletes the book with the given id
   deleteBook: (id) => axios.delete("/api/books/" + id),

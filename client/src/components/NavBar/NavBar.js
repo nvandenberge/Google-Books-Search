@@ -7,7 +7,7 @@ const NavBar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand" to="/">
-          Google Books Search
+          Google Books
         </Link>
         <button
           className="navbar-toggler"
