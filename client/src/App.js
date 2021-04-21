@@ -1,9 +1,14 @@
+import React from "react";
+import { HashRouter as Router } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
-    <div className="App">
-     <h1>Google Books Search</h1>
-    </div>
+    <Router>
+      <div>
+        <NavBar />
+      </div>
+    </Router>
   );
 }
 
