@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import API from "../utils/API";
 import Form from "../components/Form/Form";
 import BookCard from "../components/BookCard/BookCard";
+import SaveBtn from "../components/SaveBtn/SaveBtn";
+import Wrapper from "../components/Wrapper/Wrapper";
 
 const Search = () => {
   const [books, setBooks] = useState([]);
   const [bookSearch, setBookSearch] = useState("");
+  const [savedBooks, setSavedBooks] = useState([]);
 
   const bookObject = (bookData) => {
     return {
@@ -19,7 +22,7 @@ const Search = () => {
     };
   };
 
-  const handleFormSubmit = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     searchBooks(bookSearch);
   };
@@ -32,26 +35,43 @@ const Search = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleSave = (book) => {
+    API.saveBook(book)
+        .then(savedBook => setSavedBooks({savedBooks: savedBook}))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <Form
         bookSearch={bookSearch}
         setBookSearch={setBookSearch}
-        searchBooks={handleFormSubmit}
+        handleSearch={handleSearch}
       />
-      {books.map((book) => {
-        return (
-          <BookCard
-            key={book.id}
-            title={book.title}
-            authors={book.authors}
-            description={book.description}
-            image={book.image}
-            link={book.link}
-            alt={`Cover of ${book.title}`}
-          />
-        );
-      })}
+      {books.length && (
+        <Wrapper name="Results">
+          {books.map((book, index) => {
+            return (
+              <div key={index}>
+                {/* <SaveBtn onClick={() => handleSave(book)} /> */}
+                <BookCard
+                  title={book.title}
+                  authors={book.authors}
+                  description={book.description}
+                  image={book.image}
+                  link={book.link}
+                  alt={`Cover of ${book.title} by ${book.authors}`}
+                />
+                {/* <SaveBtn onClick={() => handleSave(book)} /> */}
+
+                <button 
+                    onClick={() => handleSave(book)}
+                    >SAVE</button>
+              </div>
+            );
+          })}
+        </Wrapper>
+      )}
     </div>
   );
 };

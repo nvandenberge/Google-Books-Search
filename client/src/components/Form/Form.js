@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({ bookSearch, setBookSearch, searchBooks }) => {
+const Form = ({ bookSearch, setBookSearch, handleSearch }) => {
   return (
     <div className="form-group container mb-5">
       <h4>Book Search</h4>
@@ -13,7 +13,7 @@ const Form = ({ bookSearch, setBookSearch, searchBooks }) => {
         name="bookSearch"
         value={bookSearch}
       />
-      <button type="submit" className="btn btn-primary" onClick={searchBooks}>
+      <button type="submit" className="btn btn-primary" onClick={handleSearch}>
         Search
       </button>
     </div>
