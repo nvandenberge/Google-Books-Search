@@ -14,11 +14,11 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
-    console.log("req.BODY===", req.body)
+    // console.log("req.BODY===", req.body)
     db.Book.create(req.body)
       .then(() => db.Book.find({}))
       .then((allBooks) => {
-        console.log("DB-MODEL", allBooks);
+        // console.log("DB-MODEL", allBooks);
         return res.json(allBooks)
       })
       .catch((err) => {

@@ -17,8 +17,8 @@ const Saved = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleDelete = (book) => {
-    API.deleteBook(book.id)
+  const handleRemove = (id) => {
+    API.deleteBook(id)
       .then((res) => loadBooks())
       .catch((err) => console.log(err));
   };
@@ -37,7 +37,8 @@ const Saved = () => {
                   image={book.image}
                   link={book.link}
                   alt={`Cover of ${book.title} by ${book.authors}`}
-                  handleDelete={handleDelete}
+                  handleRemove={handleRemove}
+                  id={book._id}
                 />
               </div>
             );
