@@ -2,7 +2,6 @@ import axios from "axios";
 
 const baseURL = "https://www.googleapis.com/books/v1/volumes?q=";
 
-const SERVER_URI=process.NODE_ENV === 'production' ? '/' : 'http://localhost:3000/'
 
 export default {
   // Search all books from Googlebooks API

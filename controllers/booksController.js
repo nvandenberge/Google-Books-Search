@@ -14,10 +14,18 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log("req.BODY===", req.body)
     db.Book.create(req.body)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
-  },
+      .then(() => db.Book.find({}))
+      .then((allBooks) => {
+        console.log("DB-MODEL", allBooks);
+        return res.json(allBooks)
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(422).json(err)
+      });
+      },
   update: function (req, res) {
     db.Book.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((dbModel) => res.json(dbModel))

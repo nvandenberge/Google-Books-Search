@@ -1,48 +1,51 @@
-// import React, { useEffect, useState } from "react";
-// import API from "../utils/API";
+import React, { useEffect, useState } from "react";
+import API from "../utils/API";
+import Wrapper from '../components/Wrapper/Wrapper';
+import BookCard from '../components/BookCard/BookCard';
 
-// const Saved = () => {
-//   const [books, setBooks] = useState([]);
 
-//   useEffect(() => {
-//     loadBooks();
-//   }, []);
+const Saved = () => {
+  const [books, setBooks] = useState([]);
 
-//   const loadBooks = () => {
-//     API.getSavedBooks()
-//       .then((res) => setBooks(res.data))
-//       .catch((err) => console.log(err));
-//   };
+  useEffect(() => {
+    loadBooks();
+  }, []);
 
-//   const handleDelete = () => {
-//     API.deleteBook(id)
-//       .then((res) => loadBooks())
-//       .catch((err = console.log(err)));
-//   };
+  const loadBooks = () => {
+    API.getSavedBooks()
+      .then((res) => setBooks(res.data))
+      .catch((err) => console.log(err));
+  };
 
-//   return (
-//     <div>
-//       {books.length && (
-//         <Wrapper name="Saved Books">
-//           {books.map((book, index) => {
-//             return (
-//               <div key={index}>
-//                 <BookCard
-//                   title={book.title}
-//                   authors={book.authors}
-//                   description={book.description}
-//                   image={book.image}
-//                   link={book.link}
-//                   alt={`Cover of ${book.title} by ${book.authors}`}
-//                 />
-//                 <button onClick={() => handleDelete(book)}>DELETE</button>
-//               </div>
-//             );
-//           })}
-//         </Wrapper>
-//       )}
-//     </div>
-//   );
-// };
+  const handleDelete = (book) => {
+    API.deleteBook(book.id)
+      .then((res) => loadBooks())
+      .catch((err) => console.log(err));
+  };
 
-// export default Saved;
+  return (
+    <div>
+      {books.length && (
+        <Wrapper name="Saved Books">
+          {books.map((book, index) => {
+            return (
+              <div key={index}>
+                <BookCard
+                  title={book.title}
+                  authors={book.authors}
+                  description={book.description}
+                  image={book.image}
+                  link={book.link}
+                  alt={`Cover of ${book.title} by ${book.authors}`}
+                  handleDelete={handleDelete}
+                />
+              </div>
+            );
+          })}
+        </Wrapper>
+      )}
+    </div>
+  );
+};
+
+export default Saved;

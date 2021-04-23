@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import API from "../utils/API";
 import Form from "../components/Form/Form";
 import BookCard from "../components/BookCard/BookCard";
-import SaveBtn from "../components/SaveBtn/SaveBtn";
 import Wrapper from "../components/Wrapper/Wrapper";
 
 const Search = () => {
@@ -13,7 +12,6 @@ const Search = () => {
 
   const bookObject = (bookData) => {
     return {
-      _id: bookData.id,
       title: bookData.volumeInfo.title,
       authors: bookData.volumeInfo.authors,
       description: bookData.volumeInfo.description,
@@ -37,7 +35,8 @@ const Search = () => {
 
   const handleSave = (book) => {
     API.saveBook(book)
-        .then(savedBook => setSavedBooks({savedBooks: savedBook}))
+        .then(savedBook => setSavedBooks(savedBook))
+        .then(console.log("savedBooks", savedBooks))
       .catch((err) => console.log(err));
   };
 
@@ -53,7 +52,6 @@ const Search = () => {
           {books.map((book, index) => {
             return (
               <div key={index}>
-                {/* <SaveBtn onClick={() => handleSave(book)} /> */}
                 <BookCard
                   title={book.title}
                   authors={book.authors}
@@ -61,12 +59,9 @@ const Search = () => {
                   image={book.image}
                   link={book.link}
                   alt={`Cover of ${book.title} by ${book.authors}`}
+                  book={book}
+                  handleSave={handleSave}
                 />
-                {/* <SaveBtn onClick={() => handleSave(book)} /> */}
-
-                <button 
-                    onClick={() => handleSave(book)}
-                    >SAVE</button>
               </div>
             );
           })}
