@@ -1,10 +1,11 @@
 import React from "react";
+import './Form.css';
 
 const Form = ({ bookSearch, setBookSearch, handleSearch }) => {
   return (
     <div className="form-group container mb-5">
-      <h4>Book Search</h4>
-      <label>Book: </label>
+      <h4 className="mb-3">Book Search</h4>
+      <div className="searchWrapper">
       <input
         type="text"
         className="form-control w-50 mb-3"
@@ -16,6 +17,7 @@ const Form = ({ bookSearch, setBookSearch, handleSearch }) => {
       <button type="submit" className="btn btn-primary" onClick={handleSearch}>
         Search
       </button>
+      </div>
     </div>
   );
 };

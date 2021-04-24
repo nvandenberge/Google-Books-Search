@@ -1,4 +1,5 @@
 import React from "react";
+import './RemoveBtn.css'
 
 const RemoveBtn = (props) => {
   return (

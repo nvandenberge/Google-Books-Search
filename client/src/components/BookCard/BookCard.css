@@ -1,0 +1,15 @@
+.row {
+    padding: 10px;
+}
+
+.container {
+    border-radius: 5px;
+}
+
+.view-btn {
+  border-radius: 3px;
+  padding: 3px 5px;
+  background-color: darkorange;
+  color: black;
+  cursor: pointer;
+}
