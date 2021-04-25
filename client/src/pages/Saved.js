@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import API from "../utils/API";
 import Wrapper from '../components/Wrapper/Wrapper';
 import BookCard from '../components/BookCard/BookCard';
+import NoMatch from '../pages/NoMatch';
+import { useAlert } from 'react-alert'
+
 
 
 const Saved = () => {
+  const alert = useAlert()
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -20,12 +24,13 @@ const Saved = () => {
   const handleRemove = (id) => {
     API.deleteBook(id)
       .then((res) => loadBooks())
+      .then(alert.show('Book has been removed'))
       .catch((err) => console.log(err));
   };
 
   return (
     <div>
-      {books.length && (
+      {books.length !== 0 ? (
         <Wrapper name="Saved Books">
           {books.map((book, index) => {
             return (
@@ -44,7 +49,7 @@ const Saved = () => {
             );
           })}
         </Wrapper>
-      )}
+      ): <NoMatch message={"No saved books"} />}
     </div>
   );
 };

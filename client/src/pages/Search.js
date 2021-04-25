@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import API from "../utils/API";
 import Form from "../components/Form/Form";
 import BookCard from "../components/BookCard/BookCard";
 import Wrapper from "../components/Wrapper/Wrapper";
+import NoMatch from "../pages/NoMatch";
+import { useAlert } from 'react-alert'
+
 
 const Search = () => {
+  const alert = useAlert()
   const [books, setBooks] = useState([]);
   const [bookSearch, setBookSearch] = useState("");
   const [savedBooks, setSavedBooks] = useState([]);
@@ -25,6 +29,12 @@ const Search = () => {
     searchBooks(bookSearch);
   };
 
+  useEffect(() => {
+    API.getSavedBooks()
+      .then((res) => setSavedBooks(res.data))
+      .catch((err) => console.log(err));
+  });
+
   const searchBooks = (bookSearch) => {
     API.searchBooks(bookSearch)
       .then((res) =>
@@ -34,10 +44,10 @@ const Search = () => {
   };
 
   const handleSave = (book) => {
-    API.saveBook(book)
-        .then(savedBook => setSavedBooks(savedBook))
-        .then(console.log("savedBooks", savedBooks))
-      .catch((err) => console.log(err));
+        API.saveBook(book)
+          .then((savedBook) => setSavedBooks(savedBook))
+          .then(alert.show('Book has been saved'))
+          .catch((err) => console.log(err));
   };
 
   return (
@@ -47,7 +57,7 @@ const Search = () => {
         setBookSearch={setBookSearch}
         handleSearch={handleSearch}
       />
-      {books.length && (
+      {books.length !== 0 ? (
         <Wrapper name="Results">
           {books.map((book, index) => {
             return (
@@ -66,6 +76,8 @@ const Search = () => {
             );
           })}
         </Wrapper>
+      ) : (
+        <NoMatch message={"No results"} />
       )}
     </div>
   );
