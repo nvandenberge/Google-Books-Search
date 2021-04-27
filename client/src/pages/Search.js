@@ -5,11 +5,10 @@ import Form from "../components/Form/Form";
 import BookCard from "../components/BookCard/BookCard";
 import Wrapper from "../components/Wrapper/Wrapper";
 import NoMatch from "../pages/NoMatch";
-import { useAlert } from 'react-alert'
-
+import { useAlert } from "react-alert";
 
 const Search = () => {
-  const alert = useAlert()
+  const alert = useAlert();
   const [books, setBooks] = useState([]);
   const [bookSearch, setBookSearch] = useState("");
   const [savedBooks, setSavedBooks] = useState([]);
@@ -24,9 +23,21 @@ const Search = () => {
     };
   };
 
+  useEffect(() => {
+    loadBooks();
+  }, []);
+
+  const loadBooks = () => {
+    API.getSavedBooks()
+      .then((res) => setSavedBooks(res.data))
+      .catch((err) => console.log(err));
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
-    searchBooks(bookSearch);
+    bookSearch.length === 0
+      ? alert.info("Please enter a book title to search")
+      : searchBooks(bookSearch);
   };
 
   const searchBooks = (bookSearch) => {
@@ -38,9 +49,13 @@ const Search = () => {
   };
 
   const handleSave = (book) => {
-        API.saveBook(book)
+    savedBooks
+      .map((savedBook) => savedBook.description)
+      .includes(book.description)
+      ? alert.show("Book is already saved")
+      : API.saveBook(book)
           .then((savedBook) => setSavedBooks(savedBook))
-          .then(alert.show('Book has been saved'))
+          .then(alert.show("Book has been saved"))
           .catch((err) => console.log(err));
   };
 

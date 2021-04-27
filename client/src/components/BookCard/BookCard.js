@@ -33,7 +33,7 @@ const BookCard = ({
             </Route>
           </span>
         </div>
-        <p>Written By: {authors.join(", ")}</p>
+        <p>Written By: {!authors ? <i>Author information unavailable.</i> : authors?.join(", ")}</p>
         <div className="row">
           <div className="col-md-3 mb-3">
             <img src={image} alt={alt}></img>

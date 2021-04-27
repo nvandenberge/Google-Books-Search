@@ -10,7 +10,6 @@ mongoose.connect(
 
 const bookSeed = [
     {
-        id: "1",
         title: "Code: The Hidden Language of Computer Hardware and Software",
         authors: ["Charles Petzold"],
         description:
@@ -19,7 +18,6 @@ const bookSeed = [
         link: "http://books.google.com/books?id=gYlQAAAAMAAJ&dq=Code:+The+Hidden+Language+of+Computer+Hardware+and+Software&hl=&source=gbs_api",
       },
       {
-        id: "2",
         title: "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future",
         authors: ["Ashlee Vance"],
         description:
