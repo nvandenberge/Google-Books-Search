@@ -27,6 +27,16 @@ A React-based Google books search application that allows users to search for bo
 4. Open your browser and visit 'localhost:3000' to view application.
 
 ## Usage
+Heroku Deployment: https://git.heroku.com/evening-savannah-13786.git
+
+Search Page:
+
+![Search Page](/client/public/Search-Page.png)
+
+Saved Page:
+
+![Saved Page](/client/public/Saved-Page.png)
+
 
 
 ## License
@@ -42,7 +52,7 @@ This application is covered under the MIT license.
 - Mongoose
 - Express
 - Mongo DB
-- [Random User API](https://randomuser.me/)
+- [Google Books API](https://developers.google.com/books/docs/v1/using)
 
 ## Tests
 

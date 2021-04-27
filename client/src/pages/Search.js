@@ -29,12 +29,6 @@ const Search = () => {
     searchBooks(bookSearch);
   };
 
-  useEffect(() => {
-    API.getSavedBooks()
-      .then((res) => setSavedBooks(res.data))
-      .catch((err) => console.log(err));
-  });
-
   const searchBooks = (bookSearch) => {
     API.searchBooks(bookSearch)
       .then((res) =>
