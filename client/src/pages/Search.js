@@ -15,6 +15,7 @@ const Search = () => {
 
   const bookObject = (bookData) => {
     return {
+      _id: bookData.id,
       title: bookData.volumeInfo.title,
       authors: bookData.volumeInfo.authors,
       description: bookData.volumeInfo.description,
@@ -50,8 +51,8 @@ const Search = () => {
 
   const handleSave = (book) => {
     savedBooks
-      .map((savedBook) => savedBook.description)
-      .includes(book.description)
+      .map((savedBook) => savedBook._id)
+      .includes(book._id)
       ? alert.show("Book is already saved")
       : API.saveBook(book)
           .then((savedBook) => setSavedBooks(savedBook))
