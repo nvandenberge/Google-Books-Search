@@ -57,7 +57,7 @@ const Search = () => {
       : API.saveBook(book)
           .then((savedBook) => setSavedBooks(savedBook))
           .then(alert.show("Book has been saved"))
-          .then(loadBooks())
+          .then(loadBooks)
           .catch((err) => console.log(err));
   };
 
